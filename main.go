@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"os"
 )
 
 func bf(input []byte) string {
@@ -25,7 +26,9 @@ func bf(input []byte) string {
 		case '.':
 			out = append(out, byte(mem[dp]))
 		case ',':
-			// TODO implement input
+			b := make([]byte, 1)
+			os.Stdin.Read(b)
+			mem[dp] = int(b[0])
 		case '[':
 			for mem[dp] == 0 {
 				var s int
