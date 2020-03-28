@@ -1,13 +1,13 @@
 package main
 
 import (
-	"bytes"
+	"bufio"
 	"fmt"
 	"os"
 )
 
 func bf(input []byte) string {
-	mem := [30000]int{}
+	mem := make([]int, len(input))
 	var ip, dp int
 	out := []byte{}
 
@@ -69,7 +69,15 @@ func bf(input []byte) string {
 }
 
 func main() {
-	buf := bytes.NewBufferString(">+++++++++[<++++++++>-]<.>+++++++[<++++>-]<+.+++++++..+++.[-]>++++++++[<++++>-]<.>+++++++++++[<+++++>-]<.>++++++++[<+++>-]<.+++.------.--------.[-]>++++++++[<++++>-]<+.[-]++++++++++.")
-
-	fmt.Println(bf(buf.Bytes()))
+	scan := bufio.NewScanner(os.Stdin)
+	fmt.Print("$ ")
+	for scan.Scan() {
+		b := scan.Bytes()
+		// if b length is 0 and type `q`
+		if len(b) == 0 || b[0] == 113 {
+			break
+		}
+		fmt.Println(bf(b))
+		fmt.Print("$ ")
+	}
 }
